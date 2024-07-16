@@ -38,11 +38,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             BusinessCardAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    BusinessCardApp(
-                        fullName = stringResource(R.string.hamzat_akolade),
-                        title = stringResource(R.string.software_engineer),
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                    BusinessCardApp()
                 }
             }
         }
@@ -50,11 +46,28 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun BusinessCardApp(fullName: String, title: String, modifier: Modifier = Modifier) {
+fun BusinessCardApp(modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.SpaceEvenly
+    ) {
+        BusinessCardApp1(
+            fullName = stringResource(R.string.hamzat_akolade),
+            title = stringResource(R.string.software_engineer),
+            modifier = Modifier.padding()
+        )
+        BusinessCardApp2(phoneNumber = stringResource(R.string._234_908_085_5200),
+            socialMedia = stringResource(R.string.ex_plicit),
+            email = stringResource(R.string.hamzatakolade_gmail_com))
+    }
+}
+
+
+@Composable
+fun BusinessCardApp1(fullName: String, title: String, modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
-            .fillMaxSize(),
-        verticalArrangement = Arrangement.SpaceEvenly,
+            .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         val imageLogo = painterResource(R.drawable.android_logo)
@@ -74,10 +87,6 @@ fun BusinessCardApp(fullName: String, title: String, modifier: Modifier = Modifi
                 modifier = Modifier.padding(top = 5.dp),
                 fontWeight = FontWeight.Bold
             )
-
-        BusinessCardApp2(phoneNumber = stringResource(R.string._234_908_085_5200),
-                        socialMedia = stringResource(R.string.ex_plicit),
-                        email = stringResource(R.string.hamzatakolade_gmail_com))
     }
 }
 
@@ -141,7 +150,7 @@ fun BusinessCardApp2(phoneNumber: String, socialMedia: String, email: String, mo
 @Composable
 fun GreetingPreview() {
     BusinessCardAppTheme {
-        BusinessCardApp(stringResource(R.string.hamzat_akolade), stringResource(R.string.software_engineer))
+        BusinessCardApp1(stringResource(R.string.hamzat_akolade), stringResource(R.string.software_engineer))
         BusinessCardApp2(stringResource(R.string._234_908_085_5200), stringResource(R.string.ex_plicit), stringResource(R.string.hamzatakolade_gmail_com) )
     }
 }
